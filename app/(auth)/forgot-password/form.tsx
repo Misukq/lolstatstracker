@@ -4,37 +4,30 @@ import { Alert } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@radix-ui/react-label"
-import { signIn } from "next-auth/react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react"
+import { sendPasswordResetEmail } from "@/lib/email";
 
-export const LoginForm = () => {
+
+export const ForgotPasswordForm = () => {
     const router = useRouter()
     const searchParams = useSearchParams();
     const callbackUrl = '/'
 
     const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
     const [error, setError] = useState('')
+    const [successMessage, setSuccessMessage] = useState('');
 
     const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
+
         try{
-            const res = await signIn('credentials', {
-                redirect: false,
-                email,
-                password,
-                callbackUrl
-            })
-            
-            if(!res?.error){
-                router.push(callbackUrl)
-            }
-            else{
-                setError( "Invalid email or password")
-            }
-        } catch(err: any){}
-        
+            await sendPasswordResetEmail(email)
+            setSuccessMessage('Email sent successfully.');
+        }
+        catch(err: any){
+            setError('Failed to send email.');
+        }
     }
 
     return (
@@ -48,18 +41,10 @@ export const LoginForm = () => {
                     type="email" 
                     required/>
             </div>
-            <div className="grid w-full items-center gap-1.5">
-                <Label htmlFor="password">Password</Label>
-                <Input
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    id="password" 
-                    type="password" 
-                    required/>
-            </div>
             {error && <Alert>{error}</Alert>}
+            {successMessage && <Alert variant="success">{successMessage}</Alert>}
             <div className="w-full">
-                <Button className="w-full" size="lg">Login</Button>
+                <Button className="w-full" size="lg">Send</Button>
             </div>
         </form>
     )

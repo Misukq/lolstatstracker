@@ -9,6 +9,8 @@ export default function LoginPage() {
                 <LoginForm/>
                 <p className="text-center">
                     <Link className="text-indigo-500 hover:underline" href="/register">Need to create an account?</Link>{' '}
+                    <br/>
+                    <Link className="text-indigo-500 hover:underline pt-2" href="/forgot-password">Forgot your password?</Link>{' '}
                 </p>
             </div>
         </div>
