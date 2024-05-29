@@ -31,7 +31,7 @@ export const Navbar = () => {
                 
                 <div className="hidden md:flex text-gray-500 order-3 w-full md:w-auto md:order-2">
                     <ul className="flex font-semibold justify-between">
-                        <li className="md:px-4 md:py-2 text-white"><Link href="/">Dashboard</Link></li>
+                        <li className="md:px-4 md:py-2 hover:text-white"><Link href="/">Dashboard</Link></li>
                         <li className="md:px-4 md:py-2 hover:text-white"><Link href="/champions">Champions</Link></li>
                         <li className="md:px-4 md:py-2 hover:text-white"><Link href="/classements">Classements</Link></li>
                         <li className="md:px-4 md:py-2 hover:text-white"><Link href="/statistiques">Statistiques</Link></li>
@@ -44,7 +44,7 @@ export const Navbar = () => {
                     (<>
                         <div className="flex relative" onClick={toggleDropdown} style={{ cursor: 'pointer' }}>
                             <div className="text-white md:px-4 md:py-2">{session?.user?.name}</div>
-                            <svg className="h-8 w-8 text-gray-500 pt-1"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"> 
+                            <svg className="h-8 w-8 text-gray-500 pt-1"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  strokeWidth="2"  strokeLinecap="round"  strokeLinejoin="round"> 
                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
                             </svg>
                             {isDropdownOpen && (
@@ -63,7 +63,7 @@ export const Navbar = () => {
                             )}
                         </div>
                     </>
-                    )                    :
+                    ):
                     (
                         <LoginButton/>
                     )}
