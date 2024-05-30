@@ -12,10 +12,9 @@ export const SearchBar = () => {
   const router = useRouter()
 
   const handleSearch = async () => {
-
+    
     try {
-      setError('')
-      const response = await axios.post(`/api/riot/player`, {gameName: (gameName).replace('#','/'), option: 1} );
+      const response = await axios.post(`/api/riot/searchBar`, {gameName: (gameName).replace('#','/')} );
       const redirect_url = `/summoners/${(gameName).replace('#','-')}`;
 
       try{
@@ -28,7 +27,6 @@ export const SearchBar = () => {
       
 
     } catch (err) {
-      console.error(err);
       setError('Erreur lors de la récupération des données du joueur. Veuillez vérifier les informations saisies.')
     }
   };
