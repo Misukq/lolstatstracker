@@ -4,11 +4,11 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export const POST = async (req: NextRequest) => {
     try{
-        const { puuid } = await req.json();
+        const { puuid, region } = await req.json();
         const apiKey = process.env.RIOT_API_KEY;
         
         // Get le profil par le puuid
-        const url_profil = `https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${puuid}`
+        const url_profil = `https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${puuid}`
         const res_profil = await axios.get(url_profil, {
             headers: {
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",

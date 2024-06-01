@@ -6,7 +6,6 @@ export const POST = async (req: NextRequest) => {
     try{
         const { gameName } = await req.json();
         const apiKey = process.env.RIOT_API_KEY;
-
         if (!gameName) {
             return NextResponse.json({ error: 'Missing gameName parameter' }, { status: 400 });
         }

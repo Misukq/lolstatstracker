@@ -6,7 +6,7 @@ export const POST = async (req: NextRequest) => {
     try{
         const { puuid } = await req.json();
         const apiKey = process.env.RIOT_API_KEY;
-
+        
         // Get l'historique des matches par le puuid (matches ID)
         const url_matches = `https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=20`
         const res_matches = await axios.get(url_matches, {
@@ -22,7 +22,6 @@ export const POST = async (req: NextRequest) => {
         // Get les infos des matches par matchID
         const matchesDetails = []
         for(const matchId of res_matches.data){
-            console.log(matchId)
             const url_matchDetail = `https://europe.api.riotgames.com/lol/match/v5/matches/${matchId}`
             const res_matcheDetail = await axios.get(url_matchDetail, {
                 headers: {
@@ -35,7 +34,7 @@ export const POST = async (req: NextRequest) => {
             })
             matchesDetails.push(res_matcheDetail.data)
         }
-
+        
         return NextResponse.json(matchesDetails);
     }
     catch(err){
