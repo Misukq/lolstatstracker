@@ -9,7 +9,7 @@ export const POST = async (req: NextRequest) => {
         if (!gameName) {
             return NextResponse.json({ error: 'Missing gameName parameter' }, { status: 400 });
         }
-
+        
         // Get le puuid
         const url_puuid = `https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}`;
         const res_puuid = await axios.get(url_puuid, {

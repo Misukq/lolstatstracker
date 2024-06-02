@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 type AlertProps = {
     children: React.ReactNode;
-    variant?: 'success' | 'error' | 'info' | 'warning'; // Ajoutez une prop pour spécifier le type d'alerte
+    variant?: 'success' | 'error' | 'info' | 'warning'; // Prop pour spécifier le type d'alerte
 };
 
-const Alert = ({ children, variant }: AlertProps) => {
+const Alert: React.FC<AlertProps> = ({ children, variant }) => {
+    const [visible, setVisible] = useState(true);
+
     let bgColor = '';
 
     // Définissez la couleur de fond en fonction du type d'alerte
@@ -27,9 +29,22 @@ const Alert = ({ children, variant }: AlertProps) => {
             break;
     }
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setVisible(false);
+        }, 3000);
+
+        return () => clearTimeout(timer);
+    }, []);
+    
+    if (!visible) return null;
+
     return (
-        <div className={`p-2 rounded ${bgColor}`}>
-            {children}
+        <div className={`p-2 rounded ${bgColor} flex justify-between items-center`}>
+            <span>{children}</span>
+            <button onClick={() => setVisible(false)} className="text-gray-500 hover:text-gray-700">
+                &times;
+            </button>
         </div>
     );
 };
