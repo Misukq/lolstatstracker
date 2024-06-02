@@ -118,7 +118,6 @@ export default function Summoners( { params }: {params: {regionSlug: string, sum
                                                 <p className="text-sm text-gray-400">Level: {summonerData.summonerLevel}</p>
                                             </div>
                                         </div>
-                                        {/* Condition pour afficher le bouton Refresh uniquement sur les appareils mobiles */}
                                         <div className="hidden md:block">
                                             <button 
                                                 className="px-4 py-2 bg-gray-900 hover:bg-indigo-600 text-gray-50 rounded-xl flex items-center gap-2" 
@@ -131,7 +130,6 @@ export default function Summoners( { params }: {params: {regionSlug: string, sum
                                             </button>
                                         </div>
                                     </div>
-                                    {/* Condition pour afficher le bouton Refresh uniquement sur les appareils de bureau */}
                                     <div className="md:hidden">
                                         <button 
                                             className="px-4 py-2 bg-gray-900 hover:bg-indigo-600 text-gray-50 rounded-xl flex items-center gap-2" 
