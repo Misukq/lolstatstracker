@@ -94,8 +94,6 @@ export default function Summoners( { params }: {params: {regionSlug: string, sum
         }
     }
 
-    console.log(rankData)
-
     return (
         <div className=''>
             { error && <Alert variant="error">{error}</Alert>}

@@ -16,7 +16,10 @@ const MatchCard = ({ match, summonerId, runes, spells }: {match: {match: null}, 
             if(runeId == rune.id){
                 if(other != null){
                     const r = rune.slots[0].runes.find(rune => rune.id == other)
-                    return { icon: r.icon, name: r.name }
+                    if(r){
+                        return { icon: r.icon, name: r.name }
+                    }
+                   return { icon: "", name: ""}
                 }
                 else{
                     return {icon:rune.icon, name:rune.name}
@@ -49,6 +52,7 @@ const MatchCard = ({ match, summonerId, runes, spells }: {match: {match: null}, 
         return name.length > maxLength ? name.substring(0, maxLength) + '...' : name;
     };
 
+    console.log(match.info)
     const renderTeam = (team: [], gameMode: any) =>{
         if(gameMode == "CLASSIC"){
             return(
@@ -129,6 +133,7 @@ const MatchCard = ({ match, summonerId, runes, spells }: {match: {match: null}, 
                             match.info.gameMode === "ARAM" ? "ARAM" : 
                             match.info.queueId === 420 ? "Classé Solo" : 
                             match.info.queueId === 440 ? "Classé Flexible" : 
+                            match.info.gameMode === "CHERRY" ? "ARENA" :
                             "Partie Normale"
                         }                    
                     </h2>
