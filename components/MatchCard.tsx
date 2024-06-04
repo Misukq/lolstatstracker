@@ -49,7 +49,7 @@ const MatchCard = ({ match, summonerId, runes, spells }: {match: {match: null}, 
         return name.length > maxLength ? name.substring(0, maxLength) + '...' : name;
     };
 
-    const renderTeam = (team: [], gameMode: any) =>{ 
+    const renderTeam = (team: [], gameMode: any) =>{
         if(gameMode == "CLASSIC"){
             return(
                 <div className='flex flex-col mx-1'>
@@ -60,7 +60,7 @@ const MatchCard = ({ match, summonerId, runes, spells }: {match: {match: null}, 
                                 return (
                                     <div key={player.summonerId} className='flex py-0.5'>
                                         <img src={`https://ddragon.leagueoflegends.com/cdn/14.10.1/img/champion/${player.championName}.png`} alt={player.championName} className="w-4 h-4" />
-                                        <Link className={`text-xs px-1 ${ player.riotIdGameName == summoner.riotIdGameName ? 'text-white' : 'text-gray-400'}`} href={`/summoners/${player.riotIdGameName}-${player.riotIdTagline}`}>{truncateName(player.riotIdGameName)}</Link>
+                                        <Link className={`text-xs px-1 ${ player.summonerName == summoner.summonerName ? 'text-white' : 'text-gray-400'}`} href={`/summoners/${match.info.platformId}/${player.riotIdGameName}-${player.riotIdTagline}`}>{truncateName(player.riotIdGameName)}</Link>
                                     </div>
                                 )
                             }
@@ -75,7 +75,7 @@ const MatchCard = ({ match, summonerId, runes, spells }: {match: {match: null}, 
                     {team.map((player) => (
                         <div key={player.summonerId} className='flex py-0.5'>
                             <img src={`https://ddragon.leagueoflegends.com/cdn/14.10.1/img/champion/${player.championName}.png`} alt={player.championName} className="w-4 h-4" />
-                            <Link className={`text-xs px-1 ${ player.riotIdGameName == summoner.riotIdGameName ? 'text-white' : 'text-gray-400'}`} href={`/summoners/${player.riotIdGameName}-${player.riotIdTagline}`}>{truncateName(player.riotIdGameName)}</Link>
+                            <Link className={`text-xs px-1 ${ player.summonerName == summoner.summonerName ? 'text-white' : 'text-gray-400'}`} href={`/summoners/${match.info.platformId}/${player.riotIdGameName}-${player.riotIdTagline}`}>{truncateName(player.riotIdGameName)}</Link>
                         </div>
                     ))}
                 </div>

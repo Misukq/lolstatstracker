@@ -64,7 +64,11 @@ export default function Summoners( { params }: {params: {regionSlug: string, sum
             if (!summonerData) return;
             try {
                 const res_rank = await axios.post(`/api/riot/rank`, { summonerData, region: region });
-                setRankData(res_rank.data)
+
+                const soloRank = res_rank.data.filter((data: any) => data.queueType === 'RANKED_SOLO_5x5')[0];
+                const flexRank = res_rank.data.filter((data: any) => data.queueType === 'RANKED_FLEX_SR')[0];
+                
+                setRankData([soloRank, flexRank])
             } catch (error) {
                 setError('Erreur lors de la récupération des informations sur le classement');
             }
@@ -89,6 +93,8 @@ export default function Summoners( { params }: {params: {regionSlug: string, sum
             setError('Erreur lors de l\'actualisation de la page.');
         }
     }
+
+    console.log(rankData)
 
     return (
         <div className=''>
@@ -124,7 +130,7 @@ export default function Summoners( { params }: {params: {regionSlug: string, sum
                                                 onClick={refreshInfo}
                                             >
                                                 <svg className="w-5 h-5 mx-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+                                                    <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
                                                 </svg> 
                                                 Refresh
                                             </button>
@@ -136,7 +142,7 @@ export default function Summoners( { params }: {params: {regionSlug: string, sum
                                             onClick={refreshInfo}
                                         >
                                             <svg className="w-5 h-5 mx-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+                                                <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
                                             </svg> 
                                             Refresh
                                         </button>
@@ -150,7 +156,7 @@ export default function Summoners( { params }: {params: {regionSlug: string, sum
                                     </div>
                                     <div className='flex items-center mb-4 p-4 justify-between'>
                                         {rankData.length > 0 && rankData[0] ? (
-                                        <>
+                                        <>  
                                             <div className='flex items-center'>
                                                 <div className='px-2'>
                                                     <img src={`/img/ranks/${rankData[0].tier}.png`} alt={`${rankData[0].tier}`} className="w-20 h-20 bg-black rounded-full bg-gray-800" />

@@ -48,8 +48,6 @@ export default function Champions(){
         );
     }
 
-    console.log(champions)
-
     return (
         <div className="container mx-auto p-4 bg-gray-900">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
