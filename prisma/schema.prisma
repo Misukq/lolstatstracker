@@ -14,12 +14,29 @@ datasource db {
 }
 
 model User {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  
-  email String @unique
-  name String @unique
-  password String
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  email       String    @unique
+  name        String    @unique
+  password    String
+  role        String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
 
+model Caisse {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  nom      String
+  skinIds  String[]
+}
+
+model UserSkin {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String
+  skinId    String
+  code      String   
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([userId], name: "user_skin_userId_index")
+  @@index([skinId], name: "user_skin_skinId_index")
 }

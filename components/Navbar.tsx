@@ -18,7 +18,6 @@ export const Navbar = () => {
         setIsDropdownOpen(!isDropdownOpen);
     };
 
-
     return (
         <nav className="bg-gray-900 shadow shadow-gray-300 w-full px-8 md:px-auto">
             <div className="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
@@ -35,7 +34,9 @@ export const Navbar = () => {
                         <li className="md:px-4 md:py-2 hover:text-white"><Link href="/champions">Champions</Link></li>
                         <li className="md:px-4 md:py-2 hover:text-white"><Link href="/classements">Classements</Link></li>
                         <li className="md:px-4 md:py-2 hover:text-white"><Link href="/statistiques">Statistiques</Link></li>
-                        <li className="md:px-4 md:py-2 hover:text-white"><Link href="/parameters">Parameters</Link></li>
+                        {session?.user?.role === "admin" && (
+                            <li className="md:px-4 md:py-2 hover:text-white"><Link href="/parameters">Parameters</Link></li>
+                        )}
                     </ul>
                 </div>
 
