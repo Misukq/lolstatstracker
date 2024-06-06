@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@radix-ui/react-label"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react"
-import { sendPasswordResetEmail } from "@/lib/email";
+// import { sendPasswordResetEmail } from "@/lib/email";
 
 
 export const ForgotPasswordForm = () => {
@@ -22,7 +22,7 @@ export const ForgotPasswordForm = () => {
         e.preventDefault()
 
         try{
-            await sendPasswordResetEmail(email)
+            // await sendPasswordResetEmail(email)
             setSuccessMessage('Email sent successfully.');
         }
         catch(err: any){
